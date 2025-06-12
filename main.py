@@ -16,6 +16,13 @@ bot = commands.Bot(command_prefix=".", intents=intents)
 async def on_ready():
     print("Monarquia está Online")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        return  # ignora comandos que não existem
+    raise error  # relança outros erros
+
+
 champions_by_lane = {
     "top": [
         "Darius", "Garen", "Camille", "Fiora", "Shen", "Malphite", "Ornn",
